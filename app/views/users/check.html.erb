@@ -1,0 +1,13 @@
+<h1>Check if your username is already taken</h1>
+
+<form action="/check" method="post">
+  <input type="text" name="username"><br>
+  <input type="submit" value="Search by username"><br>
+</form>
+<% if !params[:username] %>
+  <%= params[:username] = "" %>
+<% end %>
+<p>Name will display here if already taken:</p>
+<strong>
+<%= User.find_by_sql("SELECT username FROM users WHERE username IS NOT 'admin' AND username='#{params[:username]}'").to_s.gsub(/<User id: nil, username:/, "").gsub(/[\[\]#\"\">]/, '') rescue "An error has occurred" %>
+</strong>
